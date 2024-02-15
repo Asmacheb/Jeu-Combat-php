@@ -1,0 +1,401 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+.back {
+    height: 100vh;
+    width: 100vW;
+    background-position: center;
+    background-size: cover;
+    background-image: url(img/orage.png);
+    
+    }
+.joueur1{
+    height: 100vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+   justify-content: space-around;
+}
+
+
+.joueur2{
+    height: 100vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.joueur1 img{
+    height: 50vh;
+     
+}
+.image1{
+    transform: translateY(0px);
+    animation: float 6s ease-out infinite;
+}
+
+@keyframes float {
+    0%{
+        transform: translateY(0px);
+    }
+    50%{
+        transform: translateY(-50px);
+    }
+    100%{
+        transform: translateY(0px);
+    }   
+}
+
+.joueur2 img{
+    height: 50vh;  
+  
+}
+.image2{
+  
+    transform: translateY(0px);
+    animation: float 6s ease-out infinite;
+}
+
+@keyframes float {
+    0%{
+        transform: translateY(0px);
+    }
+    50%{
+        transform: translateY(-50px);
+    }
+    100%{
+        transform: translateY(0px);
+    }   
+}
+
+
+.lesjoueurs{
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+   
+}
+
+form {
+    display: inline-block;
+    padding: 20px;
+    border: 1px solid white;
+    border-radius: 8px;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.447);
+    color: white;
+  }
+
+form :hover{
+    font-weight: bold;
+    color: orange;
+  }
+  
+ 
+.vies{
+    display: flex;
+}
+  .coeur img{
+    width: 30px; 
+  height: 30px; 
+  border-radius: 50%; 
+ 
+}
+.vies2{
+    display: flex;
+}
+  .coeur2 img{
+    width: 30px; 
+  height: 30px; 
+  border-radius: 50%; 
+ 
+}
+.lesattaques{
+    display: flex;
+    justify-content: space-around;
+    width: 50vw;
+    height: 30vh;
+    gap: 5px;  
+        
+}
+.guerrier{
+   background-image: url(img/Guerrier-removebg-preview.png);
+    width: 10vw;
+    height: 50%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: -10%;
+    border: 4px solid black;
+    background-color: white;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.447);
+
+}
+
+
+
+.mage{
+    background-image: url(img/Sorcier-removebg-preview.png);
+    width: 10vw;
+    height: 50%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: -10%;
+    border: 4px solid black;
+    background-color: white;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.447);
+   
+    }
+   
+.pretre{
+    background-image: url(img/Capture_d_Ã©cran_2023-11-20_Ã\ _13.03.43-removebg-preview.png);
+    width: 10vw;
+    height: 50%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: -10%;
+    border: 4px solid black;
+    background-color: white;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.447);
+   
+} 
+.archer{
+    background-image: url(img/archer-removebg-preview.png);
+    width: 10vw;
+    height: 50%;
+    background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+     border: 4px solid black;
+     background-color: white;
+     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.447);
+   
+}   
+
+.joueur1 .lesattaques{
+    margin-right: 25%;
+}
+.joueur2 .lesattaques2{
+    margin-left: 27%;
+}
+
+
+.play :hover{
+    background-color: #2E404C;
+    color: white;
+    border: 2px solid white;
+    transform: scale(1.4);
+}
+
+ .lesattaques :nth-child(1 ):hover{
+   background-image:url(img/Le\ guerrier.png);
+   border: 2px solid #BB1A1A;
+   background-color: #C7743E;
+   transform: scale(1.4);
+   
+}
+
+.lesattaques :nth-child(2 ):hover{
+    background-image:url(img/Le\ mage.png    );
+    border: 2px solid #BB1A1A;
+    background-color: #C7743E;
+    transform: scale(1.4);
+ }
+
+ .lesattaques :nth-child(3):hover{
+    background-image:url(img/Le\ pretre.png);
+    border: 2px solid #25893B;
+    background-color: #C7743E;
+    transform: scale(1.4);
+ }
+
+ .lesattaques :nth-child(4):hover{
+    background-image: url(img/L’Archer\ -2\ points\ Jette\ un\ sort.png);
+    border: 2px solid #BB1A1A;
+    background-color:#C7743E;
+    transform: scale(1.4);
+ }
+
+ .joueur1 .lesattaques{
+    margin-left: 20%;
+ }
+
+ .joueur2 .lesattaques2{
+    margin-right: 20%;
+ }
+
+ /* javascript */
+
+ .grise{
+    filter: grayscale(100%);
+ }
+
+ .play {
+    width: 20vmin; /* Utilisation de vmin pour prendre le minimum entre la largeur et la hauteur de la vue */
+    height: 20vmin;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    z-index: 6;
+    overflow: hidden;
+    animation: zoomInOut 2s infinite alternate;
+    font-size: 2em;
+    background-color: #C7743E;
+    color: white;
+    border: 2px solid white;
+    display: none;
+  }
+  @keyframes zoomInOut {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+  
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  .lesattaques2{
+    display: flex;
+    justify-content: space-around;
+    width: 50vw;
+    height: 30vh;
+    gap: 5px;  
+        
+}
+.guerrier2{
+   background-image: url(img/Guerrier-removebg-preview.png);
+    width: 10vw;
+    height: 50%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: -10%;
+    border: 4px solid black;
+    background-color: white;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.447);
+
+}
+
+
+
+.mage2{
+    background-image: url(img/Sorcier-removebg-preview.png);
+    width: 10vw;
+    height: 50%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: -10%;
+    border: 4px solid black;
+    background-color: white;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.447);
+   
+    }
+   
+.pretre2{
+    background-image: url(img/Capture_d_Ã©cran_2023-11-20_Ã\ _13.03.43-removebg-preview.png);
+    width: 10vw;
+    height: 50%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: -10%;
+    border: 4px solid black;
+    background-color: white;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.447);
+   
+} 
+.archer2{
+    background-image: url(img/archer-removebg-preview.png);
+    width: 10vw;
+    height: 50%;
+    background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+     border: 4px solid black;
+     background-color: white;
+     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.447);
+   
+}   
+
+
+
+
+ .lesattaques2 :nth-child(1 ):hover{
+   background-image:url(img/Le\ guerrier.png);
+   border: 2px solid #BB1A1A;
+   background-color: #C7743E;
+   transform: scale(1.4);
+   
+}
+
+.lesattaques2 :nth-child(2 ):hover{
+    background-image:url(img/Le\ mage.png    );
+    border: 2px solid #BB1A1A;
+    background-color: #C7743E;
+    transform: scale(1.4);
+ }
+
+ .lesattaques2 :nth-child(3):hover{
+    background-image:url(img/Le\ pretre.png);
+    border: 2px solid #25893B;
+    background-color: #C7743E;
+    transform: scale(1.4);
+ }
+
+ .lesattaques2 :nth-child(4):hover{
+    background-image: url(img/L’Archer\ -2\ points\ Jette\ un\ sort.png);
+    border: 2px solid #BB1A1A;
+    background-color:#C7743E;
+    transform: scale(1.4);
+ }
+
+
+ .J1GAGNE{
+    
+    color: #C7743E;
+    top:40%;
+    left: 50%;
+    position: absolute;
+    z-index: 6;
+    transform: translate(-50%,-50%);
+    font-size: 50px;
+    font-weight: bold;
+    border: 3px solid white;
+    -webkit-text-stroke-color: #C7743E;
+    -webkit-text-stroke-width: 1px;
+    display: none;
+    background-color: white;
+    
+ }
+ .J2GAGNE{
+    
+    color: #C7743E;
+    top:40%;
+    left: 50%;
+    position: absolute;
+    z-index: 6;
+    transform: translate(-50%,-50%);
+    font-size: 50px;
+    font-weight: bold;
+    border: 3px solid white;
+    -webkit-text-stroke-color: #C7743E;
+    -webkit-text-stroke-width: 1px;
+    display: none;
+    background-color: white;
+ }
