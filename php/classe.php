@@ -1,10 +1,8 @@
-
 <?php
 
 class Personnages{
 
     // ATTRIBUTS
-
     public $nom;
     public $image;
     // CONSTRUCTEURS
@@ -37,49 +35,27 @@ class Guerrier extends Personnages {
     public function attaqueText() {
         return "L'Attaque permet de d'enlever 3 vies à l'adversaire)";
     }
-    public function attaque($adversaire) {
-        $adversaire->setCoeurs($adversaire->getCoeurs() - 3);
-    }
-
+   
 }
-
-
 class Mage extends Personnages {
     // Méthode 
     public function attaqueText() {
         return "L'Attaque permet de d'enlever 2 vies à l'adversaire)";
     }
-    public function attaque($adversaire) {
-        $adversaire->setCoeurs($adversaire->getCoeurs() - 2);
-    }
-
+  
 }
-
-
-
 class Pretre extends Personnages {
     // Méthode 
     public function attaqueText() {
         return "L'Attaque permet de s'ajouter une vie";
     }
-    public function attaque($adversaire) {
-        $adversaire->setCoeurs($adversaire->getCoeurs() + 1);
-    }
    
 }
-
-
 class Archer extends Personnages {
     // Méthode 
     public function attaqueText() {
         return "L'Attaque permet de d'enlever une vie à l'adversaire";
     }
-    public function attaque($adversaire) {
-        $adversaire->setCoeurs($adversaire->getCoeurs() - 1);
-    }
    
 }
-
-
-
 ?>

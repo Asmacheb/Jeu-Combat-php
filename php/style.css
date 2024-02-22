@@ -4,11 +4,7 @@
     box-sizing: border-box;
 
 }
-.titre1 .titre2 {
-    display: flex;
-height: 10vh;
-width: 100vw;
-}
+
 .resultat{
     color: white;
   margin-left: 75%;
@@ -203,12 +199,7 @@ form {
 }
 
 
-.play :hover{
-    background-color: #2E404C;
-    color: white;
-    border: 2px solid white;
-    transform: scale(1.4);
-}
+
 
  .lesattaques :nth-child(1 ):hover{
    background-image:url(img/Le\ guerrier.png);
@@ -253,37 +244,8 @@ form {
     filter: grayscale(100%);
  }
 
- .play {
-    width: 20vmin; /* Utilisation de vmin pour prendre le minimum entre la largeur et la hauteur de la vue */
-    height: 20vmin;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
-    border: none;
-    border-radius: 50%;
-    z-index: 6;
-    overflow: hidden;
-    animation: zoomInOut 2s infinite alternate;
-    font-size: 2em;
-    background-color: #C7743E;
-    color: white;
-    border: 2px solid white;
-    display: none;
-  }
-  @keyframes zoomInOut {
-    0% {
-      transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-      transform: translate(-50%, -50%) scale(1.2);
-    }
-  
-    100% {
-      transform: translate(-50%, -50%) scale(1);
-    }
-  }
+
+ 
 
   .lesattaques2{
     display: flex;
@@ -382,36 +344,3 @@ form {
  }
 
 
- .J1GAGNE{
-    
-    color: #C7743E;
-    top:40%;
-    left: 50%;
-    position: absolute;
-    z-index: 6;
-    transform: translate(-50%,-50%);
-    font-size: 50px;
-    font-weight: bold;
-    border: 3px solid white;
-    -webkit-text-stroke-color: #C7743E;
-    -webkit-text-stroke-width: 1px;
-    display: none;
-    background-color: white;
-    
- }
- .J2GAGNE{
-    
-    color: #C7743E;
-    top:40%;
-    left: 50%;
-    position: absolute;
-    z-index: 6;
-    transform: translate(-50%,-50%);
-    font-size: 50px;
-    font-weight: bold;
-    border: 3px solid white;
-    -webkit-text-stroke-color: #C7743E;
-    -webkit-text-stroke-width: 1px;
-    display: none;
-    background-color: white;
- }

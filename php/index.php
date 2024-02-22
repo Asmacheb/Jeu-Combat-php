@@ -1,3 +1,135 @@
+<?php
+
+require_once "joueurs.php";
+require_once "classe.php";
+
+session_start();
+
+if (!isset($_SESSION['joueur1'])) {
+    $joueur1 = new Joueurs("Joueur 1", 10);
+    $_SESSION['joueur1']['nom'] = $joueur1->getNom();
+    $_SESSION['joueur1']['coeurs'] = $joueur1->getCoeurs();
+    
+}
+
+if (!isset($_SESSION['joueur2'])) {
+    $joueur2 = new Joueurs("Joueur 2", 10);
+    $_SESSION['joueur2']['nom'] = $joueur2->getNom();
+    $_SESSION['joueur2']['coeurs'] = $joueur2->getCoeurs();
+}
+var_dump($_SESSION['joueur1']['coeurs']);
+
+// if ($_SERVER["REQUEST_METHOD"] != "POST") {
+//     $_SESSION['joueur1']['coeurs'] = 10;
+//     $_SESSION['joueur2']['coeurs'] = 10;
+
+// }  
+// $jeu_termine = false;
+
+
+// if ($_SESSION['joueur1']['coeurs'] <= 0 || $_SESSION['joueur2']['coeurs'] <= 0) {
+//     $jeu_termine = true;
+// }
+
+function perdre($joueur,$vies){
+    if(isset($_SESSION[$joueur]['coeurs']))
+    $_SESSION[$joueur]['coeurs'] -= $vies;
+if($_SESSION[$joueur]['coeurs'] < 0){
+    $_SESSION[$joueur]['coeurs'] = 0;
+}
+}
+function gagner($joueur, $vies) {
+    if (isset($_SESSION[$joueur]['coeurs'])) {
+        $_SESSION[$joueur]['coeurs'] += $vies;
+    }
+}
+
+if ($_SESSION['joueur1']['coeurs'] <= 0) {
+    echo "Le Joueur 1 a perdu";
+    echo ' <br>';
+    echo "Le Joueur 2 a gagné";
+}
+
+if ($_SESSION['joueur2']['coeurs'] <= 0) {
+    echo "Le Joueur 2 a perdu ";
+    echo ' <br>';
+    echo "Le Joueur 1 a gagné ";
+}
+
+
+
+
+$guerrier = new Guerrier ('guerrier', 'img/img/Guerrier-removebg-preview.png');
+  $guerrier2 = new Guerrier ('guerrier2', 'img/img/Guerrier-removebg-preview.png');
+  $mage = new Mage ('mage', 'img/Sorcier-removebg-preview.png');
+  $mage2 = new Mage ('mage2', 'img/Sorcier-removebg-preview.png');
+  $pretre = new Pretre ('pretre','img/Capture_d_Ã©cran_2023-11-20_Ã _13.03.43-removebg-preview.png' );
+  $pretre2 = new Pretre ('pretre2','img/Capture_d_Ã©cran_2023-11-20_Ã _13.03.43-removebg-preview.png' );
+  $archer = new Archer ('archer', 'img/archer-removebg-preview.png');
+  $archer2 = new Archer ('archer2', 'img/archer-removebg-preview.png');
+  
+?>
+
+
+<!-- JOUEUR 1 -->
+
+<div class="resultat" id="resultat">
+
+<?php
+
+// GUERRIER
+if (isset($_POST['submitGuerrier'])) {
+    perdre("joueur2", 3);    
+}
+
+// MAGE
+if (isset($_POST['submitMage'])) {
+    perdre("joueur2", 2);
+
+//  PRETRE  
+}
+if (isset($_POST['submitPretre'])) {
+    gagner("joueur1", 1);
+}
+
+// ARCHER
+if (isset($_POST['submitArcher'])) {
+    perdre("joueur2", 1); 
+}
+
+?>
+</div>
+<!-- JOUEUR2 -->
+<div class="resultat2" id="resultat2">
+<?php
+
+// GUERRIER 2
+if(isset($_POST['submitGuerrier2'])) {
+    perdre("joueur1", 3);
+}
+
+// MAGE 2
+if(isset($_POST['submitMage2'])) {
+    perdre("joueur1", 2);
+}
+
+// PRETRE  2
+if(isset($_POST['submitPretre2'])) {
+    gagner("joueur2", 1);   
+}
+
+// ARCHER 2
+if(isset($_POST['submitArcher2'])) {
+    perdre("joueur1", 1);
+}
+
+
+?>
+</div>
+
+
+
+
 
 <!DOCTYPE html>
 
@@ -11,100 +143,32 @@
 <body>
 <div class="back">
 <?php
-session_start();
-
-require_once 'joueurs.php';
-require_once 'classe.php';
 
 
+// if (!isset($_SESSION['tour']) || $_SESSION['tour'] == 'joueur2') {
+    
+//     $_SESSION['tour'] = 'joueur1'; 
+//     $guerrier = new Guerrier('guerrier', 'img/img/Guerrier-removebg-preview.png');
+//     $joueur2 = new Joueurs('joueur2', 'img/joueur2.png', 10);
+//     $guerrier->attaque($joueur2, 3);
+//     echo "C'est au tour du joueur 1";
+// } else {
+    
+//     $_SESSION['tour'] = 'joueur2'; 
+//     $guerrier2 = new Guerrier('guerrier2', 'img/img/Guerrier-removebg-preview.png');
+//     $joueur = new Joueurs('joueur', 'img/joueur1.png', 10);
+//     $guerrier2->attaque($joueur, 3);
+//     echo "C'est au tour du joueur 2";
+// }
 ?>
 
-    <?php
-      $guerrier = new Guerrier ('guerrier', 'img/img/Guerrier-removebg-preview.png');
-      $guerrier2 = new Guerrier ('guerrier2', 'img/img/Guerrier-removebg-preview.png');
-      $mage = new Mage ('mage', 'img/Sorcier-removebg-preview.png');
-      $mage2 = new Mage ('mage2', 'img/Sorcier-removebg-preview.png');
-      $pretre = new Pretre ('pretre','img/Capture_d_Ã©cran_2023-11-20_Ã _13.03.43-removebg-preview.png' );
-      $pretre2 = new Pretre ('pretre2','img/Capture_d_Ã©cran_2023-11-20_Ã _13.03.43-removebg-preview.png' );
-      $archer = new Archer ('archer', 'img/archer-removebg-preview.png');
-      $archer2 = new Archer ('archer2', 'img/archer-removebg-preview.png');
-      $joueur = new Joueurs ('joueur', 'img/joueur1.png', 10);
-      $joueur2 = new Joueurs ('joueur2', 'img/joueur2.png', 10);
-?>
+
+ 
+
 
     <!-- // Joueur1 -->
     <!-- <div class="titre1"><h1>Joueur1</h1></div> -->
-<div class="resultat" id="resultat">
-<?php
-// Vérifie si le formulaire a été soumis
-if (isset($_POST['submitGuerrier'])) {
-    // Obtient le nombre de vies actuel du joueur 2 depuis la session
-    $coeurs_joueur2 = isset($_SESSION['coeurs_joueur2']) ? $_SESSION['coeurs_joueur2'] : 10;
-    
-    // Effectue l'attaque et met à jour le nombre de vies du joueur 2
-    $guerrier->attaque($joueur2, $coeurs_joueur2); 
-    
-    // Stocke le nouveau nombre de vies du joueur 2 dans la session
-    $_SESSION['coeurs_joueur2'] = $joueur2->getCoeurs();
-}
-// if(isset($_POST['submitGuerrier'])) {
-//     $nombreVies = $joueur2->getCoeurs(); // Nombre de vies à retirer
 
-//     $guerrier->attaque($joueur2, $nombreVies); 
-//     echo $joueur2->getCoeurs();
-// }
-if(isset($_POST['submitMage'])) {
-    $nombreVies = $joueur2->getCoeurs(); // Nombre de vies à retirer
-
-    $mage->attaque($joueur2, $nombreVies); 
-    echo $joueur2->getCoeurs();
-}
-if(isset($_POST['submitPretre'])) {
-    $nombreVies = $joueur2->getCoeurs(); // Nombre de vies à retirer
-
-    $pretre->attaque($joueur2, $nombreVies); 
-    echo $joueur2->getCoeurs();
-}
-if(isset($_POST['submitArcher'])) {
-    $nombreVies = $joueur2->getCoeurs(); // Nombre de vies à retirer
-
-    $archer->attaque($joueur2, $nombreVies); 
-    echo $joueur2->getCoeurs();
-}
-?>
-</div>
-
-<!-- // Joueur2 -->
-<!-- <div class="titre2"><h1>Joueur2</h1></div> -->
-<div class="resultat2" id="resultat2">
-
-<?php
-if(isset($_POST['submitGuerrier2'])) {
-    $nombreVies = $joueur->getCoeurs(); // Nombre de vies à retirer
-
-    $guerrier2->attaque($joueur, $nombreVies); 
-    echo $joueur->getCoeurs();
-}
-if(isset($_POST['submitMage2'])) {
-    $nombreVies = $joueur->getCoeurs(); // Nombre de vies à retirer
-
-    $mage2->attaque($joueur, $nombreVies); 
-    echo $joueur->getCoeurs();
-}
-if(isset($_POST['submitPretre2'])) {
-    $nombreVies = $joueur->getCoeurs(); // Nombre de vies à retirer
-
-    $pretre2->attaque($joueur, $nombreVies); 
-    echo $joueur->getCoeurs();
-}
-if(isset($_POST['submitArcher2'])) {
-    $nombreVies = $joueur->getCoeurs(); // Nombre de vies à retirer
-
-    $archer2->attaque($joueur, $nombreVies); 
-    echo $joueur->getCoeurs();
-}
-?>
-</div>
     <!-- <div class="J1GAGNE" style="display: none;">
         <p>JOUEUR 1 : FÉLICITATION!!! </p>
         <p>JOUEUR 2 : GAME OVER...</p>
@@ -117,17 +181,9 @@ if(isset($_POST['submitArcher2'])) {
     <div class="joueur1">
     <div class="vies">
      
-   
-
-        <?php
-        // Générer les éléments de cœur pour le joueur 1
-        for ($i = 0; $i < 10; $i++) {
-            echo '<div class="coeur"> <img src="img/coeurblanc.png" alt=""></div>';
-        }
-        ?>
+    <p><?php echo $_SESSION['joueur1']['coeurs']?></p>
+    
     </div>
-
-   
 
     <img class="image1" src="img/joueur1.png" alt="">
 
@@ -147,20 +203,13 @@ if(isset($_POST['submitArcher2'])) {
     </div>
 </div>
 
-<button class="play" style="<?php if (isset($_POST['pseudo']) && isset($_POST['pseudo2'])) {
-                                    echo 'display: block;';
-                                } else {
-                                    echo 'display: none;';
-                                } ?>">PLAY</button>
+
+
+
 
 <div class="joueur2">
     <div class="vies2">
-        <?php
-        // Générer les éléments de cœur pour le joueur 2
-        for ($i = 0; $i < 10; $i++) {
-            echo '<div class="coeur2"> <img src="img/coeurblanc.png" alt=""></div>';
-        }
-        ?>
+        <p><?php echo $_SESSION['joueur2']['coeurs']?></p>
     </div>
 
    
@@ -183,7 +232,28 @@ if(isset($_POST['submitArcher2'])) {
 </div>
  </div>
 </div>
-<script src="script.js"></script>
+
+
+
+<!-- <script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+       
+        var boutonRejouer = document.getElementById('rejouer');
+
+        
+        boutonRejouer.addEventListener('click', function() {
+          
+            boutonRejouer.style.display = 'none';
+            
+        });
+        
+    });
+
+
+
+</script> -->
+
 </body>
 </html>
 
