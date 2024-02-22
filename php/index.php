@@ -6,36 +6,47 @@ require_once "classe.php";
 session_start();
 
 if (!isset($_SESSION['joueur1'])) {
-    $joueur1 = new Joueurs("Joueur 1", 10);
-    $_SESSION['joueur1']['nom'] = $joueur1->getNom();
-    $_SESSION['joueur1']['coeurs'] = $joueur1->getCoeurs();
-    
+    $_SESSION['joueur1'] = new Joueurs("Joueur 1", 10);
 }
 
 if (!isset($_SESSION['joueur2'])) {
-    $joueur2 = new Joueurs("Joueur 2", 10);
-    $_SESSION['joueur2']['nom'] = $joueur2->getNom();
-    $_SESSION['joueur2']['coeurs'] = $joueur2->getCoeurs();
+    $_SESSION['joueur2'] = new Joueurs("Joueur 2", 10);
 }
-var_dump($_SESSION['joueur1']['coeurs']);
+
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    $_SESSION['joueur1']['coeurs'] = 10;
+    $_SESSION['joueur2']['coeurs'] = 10;
+    $_SESSION['jeu_termine'] = false; // Réinitialise le jeu à chaque début de partie
+}
+
+// if (!isset($_SESSION['joueur1'])) {
+//     $joueur1 = new Joueurs("Joueur 1", 10);
+//     $_SESSION['joueur1']['nom'] = $joueur1->getNom();
+//     $_SESSION['joueur1']['coeurs'] = $joueur1->getCoeurs();
+    
+
+// }
+
+// if (!isset($_SESSION['joueur2'])) {
+//     $joueur2 = new Joueurs("Joueur 2", 10);
+//     $_SESSION['joueur2']['nom'] = $joueur2->getNom();
+//     $_SESSION['joueur2']['coeurs'] = $joueur2->getCoeurs();
+// }
+
 
 // if ($_SERVER["REQUEST_METHOD"] != "POST") {
 //     $_SESSION['joueur1']['coeurs'] = 10;
 //     $_SESSION['joueur2']['coeurs'] = 10;
 
 // }  
-// $jeu_termine = false;
 
-
-// if ($_SESSION['joueur1']['coeurs'] <= 0 || $_SESSION['joueur2']['coeurs'] <= 0) {
-//     $jeu_termine = true;
-// }
 
 function perdre($joueur,$vies){
     if(isset($_SESSION[$joueur]['coeurs']))
     $_SESSION[$joueur]['coeurs'] -= $vies;
 if($_SESSION[$joueur]['coeurs'] < 0){
     $_SESSION[$joueur]['coeurs'] = 0;
+    $_SESSION['jeu_termine'] = true;
 }
 }
 function gagner($joueur, $vies) {
@@ -68,6 +79,9 @@ $guerrier = new Guerrier ('guerrier', 'img/img/Guerrier-removebg-preview.png');
   $archer = new Archer ('archer', 'img/archer-removebg-preview.png');
   $archer2 = new Archer ('archer2', 'img/archer-removebg-preview.png');
   
+
+ 
+
 ?>
 
 
@@ -142,41 +156,10 @@ if(isset($_POST['submitArcher2'])) {
 </head>
 <body>
 <div class="back">
-<?php
-
-
-// if (!isset($_SESSION['tour']) || $_SESSION['tour'] == 'joueur2') {
-    
-//     $_SESSION['tour'] = 'joueur1'; 
-//     $guerrier = new Guerrier('guerrier', 'img/img/Guerrier-removebg-preview.png');
-//     $joueur2 = new Joueurs('joueur2', 'img/joueur2.png', 10);
-//     $guerrier->attaque($joueur2, 3);
-//     echo "C'est au tour du joueur 1";
-// } else {
-    
-//     $_SESSION['tour'] = 'joueur2'; 
-//     $guerrier2 = new Guerrier('guerrier2', 'img/img/Guerrier-removebg-preview.png');
-//     $joueur = new Joueurs('joueur', 'img/joueur1.png', 10);
-//     $guerrier2->attaque($joueur, 3);
-//     echo "C'est au tour du joueur 2";
-// }
-?>
-
 
  
 
 
-    <!-- // Joueur1 -->
-    <!-- <div class="titre1"><h1>Joueur1</h1></div> -->
-
-    <!-- <div class="J1GAGNE" style="display: none;">
-        <p>JOUEUR 1 : FÉLICITATION!!! </p>
-        <p>JOUEUR 2 : GAME OVER...</p>
-    </div>
-    <div class="J2GAGNE" style="display: none;">
-        <p>JOUEUR 2 : FÉLICITATION!!! </p>
-        <p>JOUEUR 1 : GAME OVER...</p>
-    </div> -->
     <div class="lesjoueurs">
     <div class="joueur1">
     <div class="vies">
@@ -203,8 +186,10 @@ if(isset($_POST['submitArcher2'])) {
     </div>
 </div>
 
-
-
+<!-- <button id="rejouer">Recommencer la partie</button> -->
+<?php if ($_SESSION['jeu_termine']): ?>
+            <div class="play"> <button onclick="window.location.reload();">Rejouer</button></div>
+        <?php endif; ?>
 
 
 <div class="joueur2">
@@ -233,10 +218,13 @@ if(isset($_POST['submitArcher2'])) {
  </div>
 </div>
 
+<style>
+    .rejouer{
+        display: none;
+    }
+</style>
 
-
-<!-- <script>
-    
+<script>
     document.addEventListener('DOMContentLoaded', function() {
        
         var boutonRejouer = document.getElementById('rejouer');
@@ -245,14 +233,11 @@ if(isset($_POST['submitArcher2'])) {
         boutonRejouer.addEventListener('click', function() {
           
             boutonRejouer.style.display = 'none';
-            
+          
         });
         
     });
-
-
-
-</script> -->
+</script>
 
 </body>
 </html>
