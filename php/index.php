@@ -1,9 +1,7 @@
 <?php
-
+session_start();
 require_once "joueurs.php";
 require_once "classe.php";
-
-session_start();
 
 if (!isset($_SESSION['joueur1'])) {
     $_SESSION['joueur1'] = new Joueurs("Joueur 1", 10);
@@ -13,11 +11,13 @@ if (!isset($_SESSION['joueur2'])) {
     $_SESSION['joueur2'] = new Joueurs("Joueur 2", 10);
 }
 
+
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     $_SESSION['joueur1']['coeurs'] = 10;
     $_SESSION['joueur2']['coeurs'] = 10;
     $_SESSION['jeu_termine'] = false; // Réinitialise le jeu à chaque début de partie
 }
+
 
 // if (!isset($_SESSION['joueur1'])) {
 //     $joueur1 = new Joueurs("Joueur 1", 10);
@@ -49,6 +49,8 @@ if($_SESSION[$joueur]['coeurs'] < 0){
     $_SESSION['jeu_termine'] = true;
 }
 }
+
+
 function gagner($joueur, $vies) {
     if (isset($_SESSION[$joueur]['coeurs'])) {
         $_SESSION[$joueur]['coeurs'] += $vies;
@@ -67,6 +69,12 @@ if ($_SESSION['joueur2']['coeurs'] <= 0) {
     echo "Le Joueur 1 a gagné ";
 }
 
+
+$jeu_termine = false;
+
+if ($_SESSION['joueur1']['coeurs'] <= 0 || $_SESSION['joueur2']['coeurs'] <= 0) {
+    $jeu_termine = true;
+}
 
 
 
@@ -143,8 +151,6 @@ if(isset($_POST['submitArcher2'])) {
 
 
 
-
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -157,8 +163,12 @@ if(isset($_POST['submitArcher2'])) {
 <body>
 <div class="back">
 
- 
-
+<?php
+// Si la session est terminée, affichez le bouton "Rejouer"
+if ($_SESSION['jeu_termine']) {
+    echo '<div class="rejouer" id="rejouer" ><button onclick="window.location.reload();">Rejouer</button></div>';
+}
+?>
 
     <div class="lesjoueurs">
     <div class="joueur1">
@@ -186,10 +196,8 @@ if(isset($_POST['submitArcher2'])) {
     </div>
 </div>
 
-<!-- <button id="rejouer">Recommencer la partie</button> -->
-<?php if ($_SESSION['jeu_termine']): ?>
-            <div class="play"> <button onclick="window.location.reload();">Rejouer</button></div>
-        <?php endif; ?>
+<!-- <button class=rejouer id="rejouer" >Recommencer la partie</button> -->
+
 
 
 <div class="joueur2">
@@ -218,25 +226,23 @@ if(isset($_POST['submitArcher2'])) {
  </div>
 </div>
 
-<style>
+<!-- <style>
     .rejouer{
         display: none;
     }
-</style>
-
+</style> -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-       
-        var boutonRejouer = document.getElementById('rejouer');
+        var boutonRejouer = document.querySelector('.rejouer button');
+        boutonRejouer.style.display = '<?php echo ($_SESSION['jeu_termine']) ? "block" : "none"; ?>';
 
-        
-        boutonRejouer.addEventListener('click', function() {
-          
-            boutonRejouer.style.display = 'none';
-          
+        boutonRejouer.addEventListener("click", function() {
+            <?php session_start() ?>
         });
-        
     });
+  
+    
+        
 </script>
 
 </body>
