@@ -15,7 +15,7 @@ if (!isset($_SESSION['joueur2'])) {
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     $_SESSION['joueur1']['coeurs'] = 10;
     $_SESSION['joueur2']['coeurs'] = 10;
-    $_SESSION['jeu_termine'] = false; // Réinitialise le jeu à chaque début de partie
+    $_SESSION['jeu_termine'] = false; 
 }
 
 
@@ -236,9 +236,9 @@ if ($_SESSION['jeu_termine']) {
         var boutonRejouer = document.querySelector('.rejouer button');
         boutonRejouer.style.display = '<?php echo ($_SESSION['jeu_termine']) ? "block" : "none"; ?>';
 
-        boutonRejouer.addEventListener("click", function() {
-            <?php session_start() ?>
-        });
+        // boutonRejouer.addEventListener("click", function() {
+          
+        // });
     });
   
     
